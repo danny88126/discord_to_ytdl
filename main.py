@@ -1,31 +1,37 @@
-from pprint import pprint
-import youtube_dl
+import discord
+from discord.ext import commands
+import json
+import os
 
-def get_video_info(youtube_url):
-    video_info = {}
+with open('setting.json','r', encoding='utf8') as jfile:
+    jdata = json.load(jfile)
 
-    with youtube_dl.YoutubeDL() as ydl:
-        info = ydl.extract_info(youtube_url, download=False)
-        # pprint(info)
-        video_info['ID'] = info.get('id')
-        video_info['標題'] = info.get('title')
-        video_info['影片縮圖'] = info.get('thumbnail')
-        video_info['上傳者'] = info.get('uploader')
-        video_info['上傳者網址'] = info.get('uploader_url')
-        video_info['影片長度(秒)'] = info.get('duration')
-        video_info['觀看次數'] = info.get('view_count')
-        video_info['留言數'] = info.get('comment_count')
-        video_info['喜歡數'] = info.get('like_count')
-        video_info['不喜歡數'] = info.get('dislike_count')
-        video_info['平均評分'] = info.get('average_rating')
-        video_info['描述'] = info.get('description')
-        video_info['標籤'] = info.get('tags')
-        video_info['網頁網址'] = info.get('webpage_url')
-        video_info['上傳日期'] = info.get('upload_date')
-    return video_info
+intents = discord.Intents.all()
 
+bot = commands.Bot(command_prefix='!YT',intents = intents)
 
-if __name__ == '__main__':
-    video_info = get_video_info('https://www.youtube.com/watch?v=yNkxYzhtZ0Y&ab_channel=%E7%99%BD%E7%B5%A6%E5%B0%8F%E5%AD%90Vino')
-    pprint(video_info)
-    #print(video_info['上傳日期'])
+@bot.event
+async def on_ready():
+    print(">>Bot is online<<")
+
+@bot.command()
+async def load(ctx,extension):
+    bot.load_extension(f'cmds.{extension}')
+    await ctx.send(f'Loaded {extension} done')
+
+@bot.command()
+async def unload(ctx,extension):
+    bot.unload_extension(f'cmds.{extension}')
+    await ctx.send(f'Unloaded {extension} done')
+
+@bot.command()
+async def reload(ctx,extension):
+    bot.reload_extension(f'cmds.{extension}')
+    await ctx.send(f'Reloaded {extension} done')
+
+for filename in os.listdir('./cmds'):
+    if filename.endswith('.py'):
+            bot.load_extension(f'cmds.{filename[:-3]}')
+
+if __name__ == "__main__":
+    bot.run(jdata['TOKEN'])

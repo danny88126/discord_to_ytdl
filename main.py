@@ -8,7 +8,7 @@ with open('setting.json','r', encoding='utf8') as jfile:
 
 intents = discord.Intents.all()
 
-bot = commands.Bot(command_prefix=jdata['PREFIX'],intents = intents)
+bot = commands.Bot(command_prefix=jdata['BOT_PREFIX'],intents = intents)
 
 @bot.event
 async def on_ready():

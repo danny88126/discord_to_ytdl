@@ -10,7 +10,7 @@ class System(Cog_Extension):
     
     @commands.command()
     async def version(self, ctx):
-        await ctx.send("v0.1")
+        await ctx.send("v0.5")
 
 def setup(bot):
     bot.add_cog(System(bot))

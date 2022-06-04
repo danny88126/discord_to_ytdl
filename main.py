@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 #Programmer: 易弘翔
-#Date: 2022/06/03
+#Date: 2022/06/04
 #機器人主程式
 #pip install discord.py
 #pip install youtube-dl
- 
  
  
 import discord                       #導入discord套件

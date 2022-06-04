@@ -15,7 +15,7 @@ class System(Cog_Extension):            #定義System類別
     
     @commands.command()               #設定discord的指令模組 
     async def version(self, ctx):     #定義version指令
-        await ctx.send("v1.0")        #回傳版本號
+        await ctx.send("v1.1")        #回傳版本號
 
 def setup(bot):                       #設定cog中讀取的程式類別為System
     bot.add_cog(System(bot))

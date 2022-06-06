@@ -1,5 +1,18 @@
 # discord_to_ytdl
 此系統為利用discord.py及yooutube-dl所完成的一個youtube查詢機器人
+
+## 基礎設定
+使用套件
+
+discord.py==1.7.3
+
+youtube-dl==2021.12.17
+
+使用前請將setting.sample複製並改成setting.json
+
+並前往discord開發者網站申請API替換"TOKEN欄位"
+
+如想修改機器人的前綴可修改"BOT_PREFIX"
 ## 主系統功能
 !!load [func]   讀取檔案
 
